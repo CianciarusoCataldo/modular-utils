@@ -1,6 +1,6 @@
 {
   "name": "modular-utils",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Utils and functions to easily work with modular ecosystem",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -20,8 +20,7 @@
   },
   "homepage": "https://github.com/CianciarusoCataldo/modular-utils#readme",
   "peerDependencies": {
-    "reselect": "^4.1.6",
-    "modular-engine-types": "^0.1.2"
+    "reselect": "^4.1.6"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.0",
