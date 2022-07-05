@@ -2,6 +2,6 @@ export {
   computeValue,
   createModularAction,
   createModularReducer,
+  createModularSelector,
   fillObject,
 } from "./utils";
-export { createSelector as createModularSelector } from "reselect";

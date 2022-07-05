@@ -13,6 +13,8 @@ import {
   ModularEngineReducerCases,
 } from "modular-engine-types";
 
+import { createSelector } from "reselect";
+
 /**
  * Compute a value using the given callback. If an error occurs, return the default value
  *
@@ -156,3 +158,13 @@ export const fillObject = <T = Record<string, any>>({
 
   return result as T;
 };
+
+/**
+ * create a standard modular-engin selector
+ *
+ *
+ * @author Cataldo Cianciaruso <https://github.com/CianciarusoCataldo>
+ *
+ * @copyright Cataldo Cianciaruso 2022
+ */
+export const createModularSelector = createSelector;
