@@ -1,6 +1,6 @@
 {
   "name": "modular-utils",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Utils and functions to easily work with modular ecosystem",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -43,18 +43,7 @@
   },
   "scripts": {
     "build": "rollup -c ./config/rollup.build.config.js",
-    "build-dev": "rollup -c ./config/rollup.dev.config.js",
-    "analyze": "rollup -c ./config/rollup.analyze.config.js",
-    "build-watch": "rollup -c ./config/rollup.dev.config.js -w",
-    "watch": "chokidar \"src/**/*.css\" \"src/**/*.tsx\" \"src/**/*.ts\" -c \"npm run build-dev\"",
     "check-types": "tsc",
-    "prestart": "npm run build-dev",
-    "start": "npm-run-all --parallel \"watch\" \"start-playground\"",
-    "init": "npm i && cd playground && npm i",
-    "start-playground": "cd playground && npm run start",
-    "build-playground": "cd playground && npm run build",
-    "predeploy": "sh ./scripts/pre-deploy.sh",
-    "deploy": "sh ./scripts/deploy.sh",
     "test": "sh ./scripts/start-tests.sh"
   }
 }

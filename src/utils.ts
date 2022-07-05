@@ -1,3 +1,11 @@
+/**
+ * @file modular-utils functions
+ *
+ * @author Cataldo Cianciaruso <https://github.com/CianciarusoCataldo>
+ *
+ * @copyright Cataldo Cianciaruso 2022
+ */
+
 import {
   ModularEngineActionCreator,
   ModularEngineCustomConfig,
@@ -5,6 +13,18 @@ import {
   ModularEngineReducerCases,
 } from "modular-engine-types";
 
+/**
+ * Compute a value using the given callback. If an error occurs, return the default value
+ *
+ * @param callback
+ * @param defaultValue default value to set if errors occurs during computation
+ *
+ * @returns computed value, or default value
+ *
+ * @author Cataldo Cianciaruso <https://github.com/CianciarusoCataldo>
+ *
+ * @copyright Cataldo Cianciaruso 2022
+ */
 export const computeValue = <T = any>(callback: () => T, defaultValue: T) => {
   let result: T = defaultValue;
   try {
@@ -16,6 +36,18 @@ export const computeValue = <T = any>(callback: () => T, defaultValue: T) => {
   return result;
 };
 
+/**
+ * Create a standard modular-engine action creator
+ *
+ * @param type action type
+ * @param prepareAction (optional) function to preare the action payload content, if not set an empty payload will be used instead
+ *
+ * @returns a modular-engine action creator with the given type set
+ *
+ * @author Cataldo Cianciaruso <https://github.com/CianciarusoCataldo>
+ *
+ * @copyright Cataldo Cianciaruso 2022
+ */
 export const createModularAction = <
   T extends Record<string, any> = Record<string, any>
 >(
@@ -44,19 +76,37 @@ export const createModularAction = <
   return actionCreator;
 };
 
-export { createSelector as createModularSelector } from "reselect";
-
-export const createModularReducer = <T = any>({
-  initialState = {} as T,
-  internalCases = {},
-  customConfig = {},
-  additionalReducer = (state, action) => state,
-}: {
+/**
+ * Create a standard modular-engine reducer
+ *
+ * @param reducerParams optional reducer parameters:
+ * - `initialState` : reducer initial state
+ * - `internalCases` : a key-value object with all reducer action cases. Every key is the action type related to a case, and the value is a function that
+ * receives the actual state and the action, and return the updated state
+ * - `customConfig` : reducer custom config
+ * - `additionalReducer` : additional reducer to merge to the returned one
+ *
+ * @returns a modular-engine reducer, ready to be used inside modular-engine system
+ *
+ * @author Cataldo Cianciaruso <https://github.com/CianciarusoCataldo>
+ *
+ * @copyright Cataldo Cianciaruso 2022
+ */
+export const createModularReducer = <T = any>(reducerConfig?: {
   initialState?: T;
   internalCases?: ModularEngineReducerCases<T>;
   customConfig?: ModularEngineCustomConfig<T>;
   additionalReducer?: ModularEngineReducer<T>;
 }): ModularEngineReducer<T> => {
+  const inputConfig = reducerConfig || {};
+  const { initialState, internalCases, customConfig, additionalReducer } = {
+    initialState: inputConfig.initialState || ({} as T),
+    internalCases: inputConfig.internalCases || {},
+    customConfig: inputConfig.customConfig || {},
+    additionalReducer:
+      inputConfig.additionalReducer || ((state, action) => state),
+  };
+
   let triggers = { ...internalCases };
   customConfig.effects &&
     customConfig.effects.length > 0 &&
@@ -64,16 +114,14 @@ export const createModularReducer = <T = any>({
       triggers[customCase.trigger] = customCase.effect;
     });
 
-  const reducer: ModularEngineReducer<T> = (state, action) => {
-    if (!state) {
-      return initialState;
-    }
+  const reducer: ModularEngineReducer<T> = function (state, action) {
+    let input = state || initialState;
     if (!action) {
-      return state;
+      return input;
     }
     const nextState = triggers[action.type]
       ? triggers[action.type](state, action)
-      : state;
+      : input;
 
     return additionalReducer(nextState, action);
   };
@@ -81,6 +129,14 @@ export const createModularReducer = <T = any>({
   return reducer;
 };
 
+/**
+ * Returns a filled object, based on `toFill` parameter, and taking missing values inside toFill parameter from default value
+ *
+ *
+ * @author Cataldo Cianciaruso <https://github.com/CianciarusoCataldo>
+ *
+ * @copyright Cataldo Cianciaruso 2022
+ */
 export const fillObject = <T = Record<string, any>>({
   defaultObj,
   toFill,
