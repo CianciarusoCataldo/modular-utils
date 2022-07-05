@@ -21,7 +21,7 @@ export default [
       },
     ],
     plugins: [
-      del({ targets: ["dist/*", "playground/src/modular-engine-preview"] }),
+      del({ targets: ["dist/*"] }),
       banner2(() => `/* eslint-disable */`),
       typescript({
         rollupCommonJSResolveHack: false,
