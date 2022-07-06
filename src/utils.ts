@@ -8,9 +8,8 @@
 
 import {
   ModularEngineActionCreator,
-  ModularEngineCustomConfig,
   ModularEngineReducer,
-  ModularEngineReducerCases,
+  ModularEngineEffects,
 } from "modular-engine-types";
 
 import { createSelector } from "reselect";
@@ -96,33 +95,31 @@ export const createModularAction = <
  */
 export const createModularReducer = <T = any>(reducerConfig?: {
   initialState?: T;
-  internalCases?: ModularEngineReducerCases<T>;
-  customConfig?: ModularEngineCustomConfig<T>;
+  effects?: ModularEngineEffects<T>;
   additionalReducer?: ModularEngineReducer<T>;
 }): ModularEngineReducer<T> => {
   const inputConfig = reducerConfig || {};
-  const { initialState, internalCases, customConfig, additionalReducer } = {
-    initialState: inputConfig.initialState || ({} as T),
-    internalCases: inputConfig.internalCases || {},
-    customConfig: inputConfig.customConfig || {},
-    additionalReducer:
-      inputConfig.additionalReducer || ((state, action) => state),
-  };
 
-  let triggers = { ...internalCases };
-  customConfig.effects &&
-    customConfig.effects.length > 0 &&
-    customConfig.effects.forEach((customCase) => {
-      triggers[customCase.trigger] = customCase.effect;
-    });
+  const initialState = inputConfig.initialState || ({} as T);
+  const effects = inputConfig.effects || {};
 
+  const additionalReducer =
+    inputConfig.additionalReducer || ((state, action) => state);
+
+  /**
+   * A standard modular-engine reducer function
+   *
+   * @author Cataldo Cianciaruso <https://github.com/CianciarusoCataldo>
+   *
+   * @copyright Cataldo Cianciaruso 2022
+   */
   const reducer: ModularEngineReducer<T> = function (state, action) {
-    let input = state || initialState;
+    const input = state || initialState;
     if (!action) {
       return input;
     }
-    const nextState = triggers[action.type]
-      ? triggers[action.type](state, action)
+    const nextState = effects[action.type]
+      ? effects[action.type](input, action)
       : input;
 
     return additionalReducer(nextState, action);

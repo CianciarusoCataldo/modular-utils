@@ -4,6 +4,8 @@ const runTests = () => {
   describe("\n   createModularReducer", () => {
     test("with no params", () => {
       const resultReducer = createModularReducer();
+
+      /* eslint-disable */
       expect(resultReducer({}, null)).toStrictEqual({});
 
       expect(resultReducer(null, { type: "@@test/test-action" })).toStrictEqual(
@@ -12,24 +14,17 @@ const runTests = () => {
     });
 
     test("with all params", () => {
-      const resultReducer = createModularReducer({
+      const resultReducer = createModularReducer<{ testField: any } | null>({
         initialState: { testField: { extraField: null } },
-        internalCases: {
+        effects: {
           "@@test/test-action": (state, action) => ({
             ...state,
             testField: action.payload,
           }),
-        },
-        customConfig: {
-          effects: [
-            {
-              effect: (state, action) => ({
-                ...state,
-                testField: { extraField: "changed by effect" },
-              }),
-              trigger: "@@test/test-action-external",
-            },
-          ],
+          "@@test/test-action-external": (state, action) => ({
+            ...state,
+            testField: { extraField: "changed by effect" },
+          }),
         },
         additionalReducer: (state, action) => state,
       });
