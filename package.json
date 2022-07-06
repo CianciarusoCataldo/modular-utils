@@ -1,6 +1,6 @@
 {
   "name": "modular-utils",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Utils and functions to easily work with modular ecosystem",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/CianciarusoCataldo/modular-utils#readme",
   "peerDependencies": {
-    "modular-engine-types": "latest",
+    "modular-engine-types": "^0.2.1",
     "reselect": "^4.1.6",
     "tslib": "^2.4.0"
   },
@@ -33,7 +33,7 @@
     "enzyme": "^3.11.0",
     "jest": "^27.4.7",
     "jest-transform-stub": "^2.0.0",
-    "modular-engine-types": "latest",
+    "modular-engine-types": "^0.2.1",
     "rollup": "^2.44.0",
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-banner2": "^1.2.2",
