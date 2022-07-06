@@ -1,6 +1,6 @@
 {
   "name": "modular-utils",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Utils and functions to easily work with modular ecosystem",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
