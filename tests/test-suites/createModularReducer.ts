@@ -6,7 +6,7 @@ const runTests = () => {
       const resultReducer = createModularReducer();
 
       /* eslint-disable */
-      expect(resultReducer({}, null)).toStrictEqual({});
+      expect(resultReducer({}, null as any)).toStrictEqual({});
 
       expect(resultReducer(null, { type: "@@test/test-action" })).toStrictEqual(
         {}

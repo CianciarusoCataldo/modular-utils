@@ -13,6 +13,12 @@
 
 <br>
 
+### 0.3.0
+
+- Modular-engine internal selectors and actions exported with the lib
+
+<br>
+
 ### 0.2.0
 
 - Modular-engine types updated
