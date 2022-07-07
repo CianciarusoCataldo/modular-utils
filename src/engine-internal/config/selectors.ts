@@ -6,7 +6,7 @@
  * @copyright Cataldo Cianciaruso 2022
  */
 
-import { ConfigState, ModularEngineGlobalState } from "modular-engine-types";
+import { ModularEngineConfigState, ModularEngineGlobalState } from "modular-engine-types";
 
 import { createModularSelector } from "../../utils";
 
@@ -19,7 +19,7 @@ import defaultConfig from "./initial-state";
  *
  * @copyright Cataldo Cianciaruso 2022
  */
-export const getConfig = (state?: ModularEngineGlobalState): ConfigState =>
+export const getConfig = (state?: ModularEngineGlobalState): ModularEngineConfigState =>
   state.config || defaultConfig;
 
 /**

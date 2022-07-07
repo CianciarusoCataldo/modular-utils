@@ -17,8 +17,8 @@ import { createSelector } from "reselect";
 /**
  * Compute a value using the given callback. If an error occurs, return the default value
  *
- * @param callback
- * @param defaultValue default value to set if errors occurs during computation
+ * @param callback a function that returns the computed value
+ * @param defaultValue default value to set if errors occurs during callback computation
  *
  * @returns computed value, or default value
  *

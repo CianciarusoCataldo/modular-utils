@@ -6,7 +6,7 @@
  * @copyright Cataldo Cianciaruso 2022
  */
 
-import { ConfigState } from "modular-engine-types";
+import { ModularEngineConfigState } from "modular-engine-types";
 
 /**
  * `config` slice initial state (default configuration)
@@ -17,7 +17,7 @@ import { ConfigState } from "modular-engine-types";
  *
  * @copyright Cataldo Cianciaruso 2022
  */
-const defaultConfig: ConfigState = {
+const defaultConfig: ModularEngineConfigState = {
   appName: "",
 };
 

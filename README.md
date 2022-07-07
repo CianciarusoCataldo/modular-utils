@@ -14,7 +14,6 @@
 - [Getting started](#getting-started)
   - [Installation](#installation)
 - [Tests](#tests)
-- [Included libraries](#included-libraries)
 - [Authors](#authors)
 - [License](#license)
 
@@ -28,7 +27,7 @@ Utils and functions to easily work with modular ecosystem
 
 ### Installation
 
-If you want to use this library inside your project, just install it:
+If you want to use these tools inside your project, just install the lib:
 
 ```sh
 npm i modular-utils
