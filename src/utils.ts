@@ -18,7 +18,7 @@
  *
  * @copyright Cataldo Cianciaruso 2022
  */
-export const computeValue = <T = any>(callback: () => T, defaultValue: T) => {
+ export const computeValue = <T = any>(callback: () => T, defaultValue: T) => {
   let result: T = defaultValue;
   try {
     result = callback();
@@ -32,7 +32,11 @@ export const computeValue = <T = any>(callback: () => T, defaultValue: T) => {
 /**
  * Returns a filled object, based on `toFill` parameter, and taking missing values inside toFill parameter from default value
  *
+ * @param defaultObj default object to use when values are missing
+ * @param toFill base object to fill
  *
+ * @return filled `toFill` object
+ * 
  * @author Cataldo Cianciaruso <https://github.com/CianciarusoCataldo>
  *
  * @copyright Cataldo Cianciaruso 2022
